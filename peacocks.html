@@ -3,41 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Peacock & Co — Enquiry Reply Assistant (Demo)</title>
+  <title>Peacock & Co — Enquiry Assistant (Demo)</title>
 
-  <!-- Clean, professional font (similar vibe to many law firm sites) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Peacock-like bright blue accent (logo/brochure vibe) */
-      --brand: #11A7D6;
-      --brand-dark:#0C86AE;
+      --brand:#11A7D6;
+      --brandDark:#0C86AE;
       --ink:#0C1B2A;
       --muted:#5A6B7B;
       --bg:#F6F8FB;
       --card:#FFFFFF;
       --stroke:#E6ECF2;
-      --shadow: 0 10px 30px rgba(12,27,42,.08);
-      --radius: 18px;
-      --radius-sm: 12px;
+      --shadow:0 10px 30px rgba(12,27,42,.08);
+      --radius:18px;
+      --radiusSm:12px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
       background: linear-gradient(180deg, #ffffff 0%, var(--bg) 60%, var(--bg) 100%);
     }
-    a{color:inherit}
     .topbar{
       background:#fff;
       border-bottom:1px solid var(--stroke);
       font-size:14px;
+      color:var(--muted);
     }
-    .topbar-inner{
+    .topbar .inner{
       max-width:1100px;
       margin:0 auto;
       padding:10px 18px;
@@ -45,55 +43,49 @@
       gap:14px;
       justify-content:space-between;
       align-items:center;
-      color:var(--muted);
+      flex-wrap:wrap;
     }
     .topbar strong{color:var(--ink); font-weight:600}
-    .topbar .phones{
-      display:flex; gap:18px; flex-wrap:wrap;
-    }
-    .brandbar{
+    .phones{display:flex; gap:18px; flex-wrap:wrap}
+
+    .header{
       max-width:1100px;
       margin:0 auto;
       padding:18px 18px 10px;
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
       gap:14px;
+      flex-wrap:wrap;
     }
     .brand{
-      display:flex; align-items:center; gap:12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    .logo-mark{
-      width:44px; height:44px; border-radius:14px;
-      background: radial-gradient(circle at 30% 30%, #7ee3ff, var(--brand) 60%, var(--brand-dark));
+    .mark{
+      width:44px;height:44px;border-radius:14px;
+      background: radial-gradient(circle at 30% 30%, #7ee3ff, var(--brand) 60%, var(--brandDark));
       box-shadow: 0 10px 22px rgba(17,167,214,.25);
       flex:0 0 auto;
     }
-    .brand h1{
-      margin:0;
-      font-size:18px;
-      letter-spacing:.2px;
-      line-height:1.1;
-    }
-    .brand p{
-      margin:2px 0 0;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .pill{
+    h1{margin:0;font-size:18px;line-height:1.1}
+    .subtitle{margin:2px 0 0;color:var(--muted);font-size:13px}
+
+    .badge{
       display:inline-flex;
-      gap:8px;
       align-items:center;
+      gap:8px;
       padding:10px 12px;
       border-radius:999px;
       background:#fff;
       border:1px solid var(--stroke);
-      color:var(--muted);
       box-shadow: 0 8px 18px rgba(12,27,42,.06);
       font-size:13px;
+      color:var(--muted);
       white-space:nowrap;
     }
-    .pill .dot{
+    .dot{
       width:8px;height:8px;border-radius:50%;
       background:#22c55e;
     }
@@ -101,43 +93,111 @@
     .wrap{
       max-width:1100px;
       margin:0 auto;
-      padding: 16px 18px 40px;
+      padding:16px 18px 40px;
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1fr;
       gap:18px;
-      align-items:start;
     }
-    @media (max-width: 980px){
-      .wrap{grid-template-columns:1fr}
-    }
-
     .card{
       background:var(--card);
       border:1px solid var(--stroke);
       border-radius:var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow:var(--shadow);
       overflow:hidden;
     }
     .card-h{
-      padding:16px 16px 12px;
+      padding:16px;
       border-bottom:1px solid var(--stroke);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:14px;
     }
-    .card-h h2{
-      margin:0;
-      font-size:16px;
-      letter-spacing:.2px;
-    }
-    .card-h small{color:var(--muted)}
+    .card-h h2{margin:0;font-size:16px}
+    .card-h p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.4}
     .card-b{padding:16px}
 
-    .demo-buttons{
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .panel{
+      border:1px solid var(--stroke);
+      border-radius:var(--radiusSm);
+      background:#fff;
+      padding:14px;
+    }
+    .panel h3{margin:0 0 6px;font-size:14px}
+    .panel p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+
+    .links{
       display:flex;
-      flex-wrap:wrap;
       gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background:#fff;
+      font-size:13px;
+      color:var(--ink);
+      text-decoration:none;
+      box-shadow: 0 8px 18px rgba(12,27,42,.06);
+    }
+    .chip:hover{border-color:#cfe7f2}
+
+    details{
+      border:1px solid var(--stroke);
+      border-radius:var(--radiusSm);
+      background:#fff;
+      overflow:hidden;
+      margin-top:10px;
+    }
+    summary{
+      cursor:pointer;
+      padding:12px 12px;
+      font-weight:700;
+      font-size:13px;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{display:none}
+    .summary-meta{
+      font-weight:600;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .details-body{
+      border-top:1px solid var(--stroke);
+      padding:12px;
+    }
+    .example{
+      background:#F7FAFD;
+      border:1px solid var(--stroke);
+      border-radius:12px;
+      padding:12px;
+      font-size:13px;
+      line-height:1.5;
+      white-space:pre-wrap;
+      word-wrap:break-word;
+    }
+    .row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-top:10px;
     }
     .btn{
       appearance:none;
@@ -146,93 +206,36 @@
       color:var(--ink);
       padding:10px 12px;
       border-radius:999px;
-      font-weight:600;
+      font-weight:700;
       font-size:13px;
       cursor:pointer;
       transition: transform .06s ease, border-color .2s ease, box-shadow .2s ease;
     }
     .btn:hover{border-color:#cfe7f2; box-shadow: 0 10px 18px rgba(12,27,42,.06)}
     .btn:active{transform: translateY(1px)}
-    .btn.primary{
-      background: linear-gradient(180deg, #2cc7f3, var(--brand));
-      color:#fff;
-      border-color: transparent;
-      box-shadow: 0 14px 26px rgba(17,167,214,.25);
-    }
-    .btn.primary:hover{box-shadow: 0 16px 30px rgba(17,167,214,.30)}
-    .btn.ghost{
-      background:transparent;
-    }
+    .hint{color:var(--muted); font-size:12px}
 
-    textarea{
-      width:100%;
-      min-height:240px;
-      border-radius:var(--radius-sm);
-      border:1px solid var(--stroke);
-      padding:12px 12px;
-      font: 14px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--ink);
-      outline:none;
-      resize:vertical;
-      background:#fff;
-    }
-    textarea:focus{border-color:#bfe9f7; box-shadow: 0 0 0 4px rgba(17,167,214,.12)}
-
-    .row{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-    .hint{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .chatlog{
+    .placeholder{
+      border:1px dashed #BFE9F7;
+      background: #F0FBFF;
+      border-radius:var(--radiusSm);
+      padding:18px;
+      min-height:380px;
       display:flex;
       flex-direction:column;
+      justify-content:center;
       gap:10px;
-      max-height:520px;
-      overflow:auto;
-      padding-right:6px;
     }
-    .msg{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .avatar{
-      width:34px;height:34px;border-radius:12px;
-      background: #EAF7FC;
-      border:1px solid #D6F0FA;
-      display:flex;align-items:center;justify-content:center;
-      color:var(--brand-dark);
-      font-weight:800;
-      flex:0 0 auto;
-    }
-    .bubble{
-      background:#fff;
-      border:1px solid var(--stroke);
-      border-radius: 16px;
-      padding:12px 12px;
-      box-shadow: 0 10px 18px rgba(12,27,42,.06);
-      width:100%;
-    }
-    .bubble .meta{
-      color:var(--muted);
+    .placeholder strong{color:#08495e}
+    .codehint{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
       font-size:12px;
-      margin-bottom:6px;
-    }
-    .bubble pre{
-      margin:0;
-      white-space:pre-wrap;
-      word-wrap:break-word;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size:14px;
-      line-height:1.55;
+      color:#0B5E79;
+      background:#E6F8FF;
+      border:1px solid #D6F0FA;
+      border-radius:10px;
+      padding:10px;
+      overflow:auto;
     }
 
     .footer{
@@ -242,112 +245,241 @@
       color:var(--muted);
       font-size:12px;
     }
-    .banner{
-      background: #F0FBFF;
-      border:1px solid #D6F0FA;
-      color:#0B5E79;
-      padding:10px 12px;
-      border-radius:14px;
-      margin-top:10px;
-      font-size:13px;
-      line-height:1.4;
-    }
-    .banner strong{color:#08495e}
   </style>
 </head>
 
 <body>
   <div class="topbar">
-    <div class="topbar-inner">
+    <div class="inner">
       <div class="phones">
         <div><strong>Wimbledon:</strong> 020 8944 5290</div>
         <div><strong>Epsom:</strong> 020 8035 0388</div>
       </div>
-      <div>Peacock &amp; Co Solicitors — Enquiry Reply Assistant (Demo)</div>
+      <div>Peacock &amp; Co Solicitors — Enquiry Assistant (Demo)</div>
     </div>
   </div>
 
-  <div class="brandbar">
+  <div class="header">
     <div class="brand">
-      <div class="logo-mark" aria-hidden="true"></div>
+      <div class="mark" aria-hidden="true"></div>
       <div>
         <h1>Peacock &amp; Co Solicitors</h1>
-        <p>Drafting replies to Wills &amp; LPA enquiries</p>
+        <div class="subtitle">Wills &amp; Lasting Power of Attorney enquiries</div>
       </div>
     </div>
 
-    <div class="pill" title="Demo status">
+    <div class="badge" title="Demo status">
       <span class="dot"></span>
-      Demo mode: drafting only
+      Demo mode: embedded chatbot
     </div>
   </div>
 
-  <div class="wrap">
-    <!-- LEFT: input -->
+  <main class="wrap">
     <section class="card">
       <div class="card-h">
-        <div>
-          <h2>Paste an enquiry email</h2>
-          <small>Tip: Use the demo buttons to populate realistic examples instantly.</small>
-        </div>
+        <h2>Enquiry Reply Assistant</h2>
+        <p>
+          Use the chat to share an enquiry email and receive a suggested reply draft.
+          (For this demo, the chatbot UI is embedded below.)
+        </p>
       </div>
+
       <div class="card-b">
-        <div class="demo-buttons" style="margin-bottom:12px;">
-          <button class="btn" id="demoWill">Demo: Will (individual)</button>
-          <button class="btn" id="demoWillCouple">Demo: Will (couple)</button>
-          <button class="btn" id="demoLpa">Demo: LPA</button>
-          <button class="btn" id="demoBoth">Demo: Will + LPA</button>
-          <button class="btn ghost" id="clear">Clear</button>
-        </div>
+        <div class="grid">
+          <!-- LEFT: demo help + examples -->
+          <div class="panel">
+            <h3>What this helps with</h3>
+            <p>
+              Drafting consistent, professional replies to common Wills and LPA enquiries — faster,
+              with fees and wording aligned to the firm’s approved messaging.
+            </p>
 
-        <textarea id="input" placeholder="Subject: ...&#10;&#10;Email body..."></textarea>
+            <div class="links">
+              <a class="chip" href="#" onclick="return false;">Private Client</a>
+              <a class="chip" href="#" onclick="return false;">Wills</a>
+              <a class="chip" href="#" onclick="return false;">LPAs</a>
+              <a class="chip" href="#" onclick="return false;">Estate Planning</a>
+            </div>
 
-        <div class="row">
-          <div class="hint">
-            The assistant will draft a reply in Katherine’s tone (no attachments included for this demo).
+            <div style="margin-top:14px;">
+              <h3 style="margin:0 0 6px;font-size:14px;">Try a demo enquiry</h3>
+              <p>
+                Expand one below and copy/paste into the chatbot. These are designed to work well with your flow:
+                Will (individual), Will (couple), LPA, Will + LPA, and one “complex/ambiguous” to show safe clarifying questions.
+              </p>
+
+              <!-- Example 1: Will (individual) -->
+              <details>
+                <summary>
+                  Will enquiry (individual)
+                  <span class="summary-meta">Straightforward → quote £850 + VAT</span>
+                </summary>
+                <div class="details-body">
+                  <div class="example" id="ex1">Subject: Will enquiry
+
+Hi
+
+I’d like to put a will in place. I don’t currently have one.
+
+Could you let me know your costs and what the process would be?
+
+Many thanks
+Alex</div>
+                  <div class="row">
+                    <button class="btn" data-copy="ex1">Copy text</button>
+                    <span class="hint">Expected: will reply + included services + mention codicil option + 2-week lead time.</span>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Example 2: Will (couple / mirror wills) -->
+              <details>
+                <summary>
+                  Will enquiry (couple / mirror wills)
+                  <span class="summary-meta">Straightforward → quote £1,200 + VAT</span>
+                </summary>
+                <div class="details-body">
+                  <div class="example" id="ex2">Subject: Mirror wills
+
+Hello
+
+My partner and I would like to make mirror wills.
+
+Please could you let us know the fee, what is included, and how we get started?
+
+Thanks
+Priya</div>
+                  <div class="row">
+                    <button class="btn" data-copy="ex2">Copy text</button>
+                    <span class="hint">Expected: mirror wills fee + included services + next steps.</span>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Example 3: LPA only -->
+              <details>
+                <summary>
+                  LPA enquiry (one person)
+                  <span class="summary-meta">Quote LPA fees + OPG £82/LPA</span>
+                </summary>
+                <div class="details-body">
+                  <div class="example" id="ex3">Subject: Lasting Power of Attorney
+
+Hi
+
+I’d like to arrange lasting powers of attorney. I’m not sure whether I need the finance one, the health one, or both.
+
+Could you tell me the costs and next steps?
+
+Kind regards
+Martin</div>
+                  <div class="row">
+                    <button class="btn" data-copy="ex3">Copy text</button>
+                    <span class="hint">Expected: explain two types + fee options (£750/£950) + OPG fee + offer meeting.</span>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Example 4: Will + LPA (couple) -->
+              <details open>
+                <summary>
+                  Will + LPA enquiry (couple)
+                  <span class="summary-meta">Quote wills + LPA fees + 10% discount</span>
+                </summary>
+                <div class="details-body">
+                  <div class="example" id="ex4">Subject: Wills and Powers of Attorney
+
+Hi
+
+My husband and I are looking to put our wills in place and also set up lasting powers of attorney.
+
+We don’t currently have any wills. We own our home jointly and have two adult children.
+
+Could you please let us know the costs involved and what the process would be?
+
+Many thanks
+Sarah Thompson</div>
+                  <div class="row">
+                    <button class="btn" data-copy="ex4">Copy text</button>
+                    <span class="hint">Expected: mirror wills fee + LPA fees + OPG £82/LPA + 10% combined discount.</span>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Example 5: Complex/ambiguous (should trigger clarifying Qs / avoid new fees) -->
+              <details>
+                <summary>
+                  Complex / ambiguous enquiry (safety test)
+                  <span class="summary-meta">Should ask clarifying questions (no new fees)</span>
+                </summary>
+                <div class="details-body">
+                  <div class="example" id="ex5">Subject: Will advice (trusts / overseas property)
+
+Hello
+
+I’d like to update my will. I have a property in Spain and I’d like something that protects my children’s inheritance as I’ve recently remarried.
+
+I’ve also been told I might need some kind of trust in the will.
+
+Could you let me know your fees and how this works?
+
+Thanks
+David</div>
+                  <div class="row">
+                    <button class="btn" data-copy="ex5">Copy text</button>
+                    <span class="hint">Expected: avoid quoting new trust fees; offer meeting and ask 2–3 clarifying questions.</span>
+                  </div>
+                </div>
+              </details>
+
+              <div class="row" style="margin-top:12px;">
+                <span class="hint">
+                  Demo tip: start with a straightforward one (fast + confident), then use the complex one to show “safe behaviour”.
+                </span>
+              </div>
+            </div>
           </div>
-          <div style="display:flex; gap:10px; align-items:center;">
-            <button class="btn primary" id="send">Generate reply draft</button>
-          </div>
-        </div>
 
-        <div class="banner">
-          <strong>Demo “wow” moment:</strong> click a demo enquiry, then “Generate reply draft”. It should return a polished email in seconds.
-        </div>
-      </div>
-    </section>
-
-    <!-- RIGHT: output / chat -->
-    <section class="card">
-      <div class="card-h">
-        <div>
-          <h2>Drafted reply</h2>
-          <small>Copy/paste into Outlook — edit if needed.</small>
-        </div>
-      </div>
-      <div class="card-b">
-        <div class="chatlog" id="chatlog">
-          <div class="msg">
-            <div class="avatar">K</div>
-            <div class="bubble">
-              <div class="meta">Assistant</div>
-              <pre>Paste an enquiry on the left and click “Generate reply draft”.</pre>
+          <!-- RIGHT: chatbot placeholder -->
+          <div class="placeholder" id="chatbot-container">
+            <div>
+              <strong>Chatbot embed placeholder</strong>
+              <div style="color:#0B5E79; margin-top:6px; font-size:13px; line-height:1.45;">
+                Paste your chatbot widget script inside the <code>&lt;!-- CHATBOT SCRIPT START --&gt;</code> block
+                near the bottom of this file.
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="row" style="margin-top:14px;">
-          <button class="btn" id="copy">Copy latest draft</button>
-          <span class="hint" id="status"></span>
-        </div>
       </div>
     </section>
-  </div>
+  </main>
 
   <div class="footer">
-    Drafts are for general guidance only and should be reviewed before sending. (Demo page.)
+    Demo page only. Drafts should always be reviewed before sending.
   </div>
 
+  <script>
+    // Copy buttons for demo enquiries
+    document.addEventListener("click", async (e) => {
+      const btn = e.target.closest("[data-copy]");
+      if (!btn) return;
+      const id = btn.getAttribute("data-copy");
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const text = el.textContent;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        const old = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(() => btn.textContent = old, 1200);
+      } catch {
+        alert("Copy failed (browser permissions). Please copy manually.");
+      }
+    });
+  </script>
   <script type="module">
     import Arto from "https://media.arto.chat/arto.js";
 
@@ -361,6 +493,6 @@
         userMessageColor: "#00aee8"
       }
     });
-  </script>
+</script>
 </body>
 </html>
